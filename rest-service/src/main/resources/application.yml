@@ -2,6 +2,33 @@
 spring:
   application:
     name: REST-SERVER
+
+eureka:
+  client:
+    service-url:
+      #      defaultZone: http://lwh2.com:8888/eureka/
+      defaultZone: http://localhost:8888/eureka/
+demo:
+  map:
+    demo1: "i m s1"
+
+---
 server:
   port: 10001
+spring:
+  profiles: s1
 
+demo:
+  map:
+    demo1: "i m s1"
+
+---
+server:
+  port: 10002
+spring:
+  profiles: s2
+
+demo:
+  map:
+    demo1: "i m s2"
+---
