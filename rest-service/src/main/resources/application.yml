@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: REST-SERVER
+server:
+  port: 10001
+
