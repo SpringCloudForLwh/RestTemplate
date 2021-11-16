@@ -18,6 +18,11 @@
         <spring-cloud.version>2020.0.4</spring-cloud.version>
     </properties>
     <packaging>pom</packaging>
+    <modules>
+        <module>rest-client</module>
+        <module>rest-service</module>
+
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
