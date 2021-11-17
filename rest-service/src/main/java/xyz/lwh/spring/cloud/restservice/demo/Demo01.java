@@ -19,7 +19,8 @@ public class Demo01 {
     private String var;
 
     @RequestMapping("map")
-    public String map(){
+    public String map() throws InterruptedException {
+        Thread.sleep(2000);
         return var;
     }
 

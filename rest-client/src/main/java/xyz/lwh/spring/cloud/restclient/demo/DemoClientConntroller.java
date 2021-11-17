@@ -1,5 +1,8 @@
 package xyz.lwh.spring.cloud.restclient.demo;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.exception.HystrixTimeoutException;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
@@ -7,6 +10,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -38,6 +42,22 @@ public class DemoClientConntroller {
     public Object lb(String id){
         ServiceInstance choose = ribbonLoadBalancerClient.choose(id);
         return choose;
+    }
+
+    @RequestMapping("hystrix")
+    @HystrixCommand(
+            fallbackMethod = "hystrixFallback",
+            ignoreExceptions = {IllegalStateException.class}
+    )
+    public String hystrix(String id){
+        String forObject = restTemplate.getForObject("http://REST-SERVER/demo/1/map", String.class);
+        System.out.println(forObject);
+        return forObject;
+    }
+
+    public String hystrixFallback(String id,Throwable e){
+        System.out.println(Thread.currentThread().getName());
+        return "出错了！";
     }
 
     /**

@@ -32,7 +32,8 @@ public class DemoConfig {
 
     @Bean
     public IRule myRule(){
-        return new MyRule();
+        //return new MyRule();
+        return new RoundRobinRule();
     }
 
 
