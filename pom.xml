@@ -21,7 +21,6 @@
     <modules>
         <module>rest-client</module>
         <module>rest-service</module>
-
     </modules>
     <dependencies>
         <dependency>

@@ -10,3 +10,7 @@ eureka:
   client:
     service-url:
       dafaultZone: http://localhost:8888/eureka/
+
+
+
+
